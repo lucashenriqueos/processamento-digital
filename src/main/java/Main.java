@@ -1,13 +1,8 @@
-package org.lucashos;
-
-import Exercicios.EscalaCinza;
-import Exercicios.LenaGray;
-import Exercicios.QuadradoColorido;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Main {
 
@@ -17,10 +12,17 @@ public class Main {
         //lenaGrayComQuadrado();
         //lenaGrayAbstrata();
         //lenaPretoBranco();
-        lenaMetadeFrequencia();
+        //lenaMetadeFrequencia();
+    	//lenaCinza();
+    	lenaColoridona();
     }
 
-    public static void quadrado () throws IOException {
+    private static void lenaColoridona() throws IOException {
+    	BufferedImage image = ImageIO.read(new File("lena_gray_256.png"));
+        new LenaGray(image).lenaColoridona(ImageIO.read(new File("referencia.png")));	
+	}
+
+	public static void quadrado () throws IOException {
         int height = 200, width = 200;
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
         new QuadradoColorido(bufferedImage, height, width).desenha();
@@ -50,5 +52,10 @@ public class Main {
     public static void lenaMetadeFrequencia() throws IOException {
         BufferedImage image = ImageIO.read(new File("lena_gray_256.png"));
         new LenaGray(image).metadeFrequencia();
+    }
+    
+    public static void lenaCinza() throws IOException {
+        BufferedImage image = ImageIO.read(new File("lena_color_256.png"));
+        new LenaGray(image).lenaCinza();
     }
 }
