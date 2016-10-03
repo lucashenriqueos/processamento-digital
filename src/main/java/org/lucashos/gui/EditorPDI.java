@@ -18,6 +18,8 @@ import org.lucashos.gui.tela.TelaEx01;
 import org.lucashos.gui.tela.TelaEx02;
 import org.lucashos.gui.tela.TelaEx03;
 import org.lucashos.gui.tela.TelaEx04;
+import org.lucashos.gui.tela.TelaEx05;
+import org.lucashos.gui.tela.TelaEx06;
 
 public class EditorPDI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -27,12 +29,16 @@ public class EditorPDI extends JFrame implements ActionListener {
 	private JMenuItem jmEx02 = new JMenuItem("Ex02");
 	private JMenuItem jmEx03 = new JMenuItem("Ex03");
 	private JMenuItem jmEx04 = new JMenuItem("Ex04");
+	private JMenuItem jmEx05 = new JMenuItem("Ex05");
+	private JMenuItem jmEx06 = new JMenuItem("Ex06");
 	private JMenuItem jmSair = new JMenuItem("Sair");
 	public JDesktopPane jdPane = new JDesktopPane();
 	private Tela telaEx01;
 	private Tela telaEx02;
 	private Tela telaEx03;
 	private Tela telaEx04;
+	private Tela telaEx05;
+	private Tela telaEx06;
 
 	public EditorPDI() {
 		getContentPane().add(jdPane);
@@ -41,6 +47,8 @@ public class EditorPDI extends JFrame implements ActionListener {
 		jmExercicios.add(jmEx02);
 		jmExercicios.add(jmEx03);
 		jmExercicios.add(jmEx04);
+		jmExercicios.add(jmEx05);
+		jmExercicios.add(jmEx06);
 		jmExercicios.add(jmSair);
 		setJMenuBar(jmPrincipal);
 		jmSair.addActionListener(this);
@@ -48,6 +56,8 @@ public class EditorPDI extends JFrame implements ActionListener {
 		jmEx01.addActionListener(this);
 		jmEx03.addActionListener(this);
 		jmEx04.addActionListener(this);
+		jmEx05.addActionListener(this);
+		jmEx06.addActionListener(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 700);
 	}
@@ -105,6 +115,26 @@ public class EditorPDI extends JFrame implements ActionListener {
 				File file = fc.getSelectedFile();
 				telaEx04 = new TelaEx04("Tela Ex04 - ...", this, file);
 				jdPane.moveToFront(telaEx04);
+			}
+			
+		} else if (evt.getSource() == jmEx05) {
+			fc = new JFileChooser();
+			returnVal = fc.showOpenDialog(this);
+			
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				telaEx05 = new TelaEx05("Tela Ex05 - ...", this, file);
+				jdPane.moveToFront(telaEx05);
+			}
+			
+		} else if (evt.getSource() == jmEx06) {
+			fc = new JFileChooser();
+			returnVal = fc.showOpenDialog(this);
+			
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				telaEx06 = new TelaEx06("Tela Ex06 - ...", this, file);
+				jdPane.moveToFront(telaEx06);
 			}
 			
 		} 

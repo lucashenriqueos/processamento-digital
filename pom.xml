@@ -3,4 +3,8 @@
   <groupId>processamento-digital</groupId>
   <artifactId>processamento-digital</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+	<project.build.java>1.7</project.build.java>
+  </properties>
 </project>

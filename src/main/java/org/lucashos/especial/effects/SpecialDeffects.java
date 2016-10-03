@@ -86,11 +86,11 @@ public class SpecialDeffects extends JFrame{
 		int limiar = 256/ntons;
 		List<Integer> tons = new ArrayList<>();
 		
-		for(int i = 0; i < ntons; i++) {
+		/*for(int i = 0; i < ntons; i++) {
 			tons.add(256/i);
 		}
 		
-		Collections.sort(tons);
+		Collections.sort(tons);*/
 		
 		int w = image.getWidth(), h = image.getHeight();
 
@@ -144,7 +144,34 @@ public class SpecialDeffects extends JFrame{
         return image;
 	}
 	
-	public BufferedImage lenaColoridona(BufferedImage referencia) {
+	public BufferedImage resize(Double scale){
+		int scaledH = (int) (image.getHeight() * scale);
+		int scaledW = (int) (image.getWidth() * scale);
+		int scaledSize = scaledH * scaledW;
+		
+		int w = image.getWidth(), h = image.getHeight();
+		
+        int [] pixels = image.getRGB(0, 0, w, h, null, 0, w);
+        
+        int[] scaledPixels = new int[scaledSize];
+        
+        
+        for (int row = 0; row < scaledH; row ++){
+            for (int col = 0; col < scaledW; col ++){
+            	
+            	int rgb =  image.getRGB(row*h/scaledH, col*w/scaledW); 
+                
+            	scaledPixels[scaledW * col + row] = rgb;
+            }
+        }
+        
+        BufferedImage img = new BufferedImage(scaledW, scaledH, BufferedImage.TYPE_INT_BGR);
+        img.setRGB(0, 0, scaledW, scaledH, scaledPixels, 0, scaledW);
+		
+		return img;
+	}
+	
+	public BufferedImage colorize(BufferedImage referencia) {
 		int w = image.getWidth(), h = image.getHeight();
 		Map<Integer, Color> map = pegarCores(referencia);
 		System.out.println("Terminou");
