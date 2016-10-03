@@ -22,16 +22,15 @@ import javax.swing.SwingUtilities;
 import org.lucashos.especial.effects.SpecialDeffects;
 import org.lucashos.gui.EditorPDI;
 
-public class TelaEx02 extends Tela implements ActionListener {
+public class TelaEx04 extends Tela implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private File file;
 	private BufferedImage imagem;
 	private JButton btnAcao;
 	private JButton btnAcao2;
-	ImageIcon icone;
 	SpecialDeffects special;
 
-	public TelaEx02(String titulo, EditorPDI telaPrincipal, File file) {
+	public TelaEx04(String titulo, EditorPDI telaPrincipal, File file) {
 		super(titulo, telaPrincipal);
 		this.file = file;
 
@@ -41,7 +40,7 @@ public class TelaEx02 extends Tela implements ActionListener {
 			
 			String infoImagem = "Dimensões: " + imagem.getWidth() + "x" + imagem.getHeight() + "Bandas: "
 					+ imagem.getRaster().getNumBands();
-			icone = new ImageIcon(imagem);
+			ImageIcon icone = new ImageIcon(imagem);
 			JLabel labImagem = new JLabel(icone);
 
 			Container contentPane = this.getContentPane();
@@ -69,16 +68,15 @@ public class TelaEx02 extends Tela implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAcao) {
-			System.out.println("Tela02");
-
-			String[] options = { "R", "G", "B" };
-			int n = JOptionPane.showOptionDialog((Component) SwingUtilities.getWindowAncestor(this), "Escolha o componente RGB",
-					"Escolha o componente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, 
-					options, 
-					options[0]);
+			System.out.println("Tela04");
 			
-		
-			special.tonsDeCinza(options[n]);
+			int s= Integer.parseInt(JOptionPane.showInputDialog("Quantidade de níveis:"));
+			
+			if(s > 1 && s < 256){
+				special.tonsDeCinza(s);
+			} else {
+				 actionPerformed(e);
+			}
 			
 			this.repaint();
 			System.out.println("OK!");

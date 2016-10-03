@@ -1,63 +1,30 @@
 package org.lucashos.especial.effects;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.SortedSet;
+
+import javax.swing.JFrame;
 
 /**
  * Created by lucas on 23/08/16.
  */
 public class SpecialDeffects extends JFrame{
-    BufferedImage image;
-    //Graphics g;
+	private static final long serialVersionUID = 5478972601424351307L;
+	BufferedImage image;
 
     public SpecialDeffects(BufferedImage image) {
         this.image = image;
-        //this.g = image.getGraphics();
     }
 
-    /*private void plotImage(BufferedImage imagem){
-        String infoImagem =  "Dimensções: " + imagem.getWidth() + "x" + imagem.getHeight() + "Bandas: " + imagem.getRaster().getNumBands();
-
-        ImageIcon icon = new ImageIcon(imagem);
-        JLabel label = new JLabel(icon);
-        JFrame frame = new JFrame("Display da imagem");
-        Container container = frame.getContentPane();
-        container.setLayout(new BorderLayout());
-        container.add(new JScrollPane(label),BorderLayout.CENTER);
-        container.add(new JLabel(infoImagem), BorderLayout.SOUTH);
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(imagem.getWidth()+20, imagem.getHeight()+50);
-
-        frame.setVisible(true);
-    }
-
-    public void desenha(){
-        plotImage(image);
-    }
-
-    public void retanguloSalva() throws IOException {
-        g.setColor(Color.WHITE);
-        g.drawRect(20,20,100,100);
-        
-        ImageIO.write(image, "PNG", new File("lena_mudada.png"));
-
-        plotImage(image);
-    }*/
-
-    public void arteAbstrata() throws IOException {
+    public BufferedImage arteAbstrata() {
         int w = image.getWidth(), h = image.getHeight();
 
         int [] pixels = image.getRGB(0, 0, w, h, null, 0, w);
@@ -71,10 +38,11 @@ public class SpecialDeffects extends JFrame{
             }
         }
         image.setRGB(0, 0, w, h, pixels, 0, w);
-        ImageIO.write(image, "PNG", new File("lenaAbstrata.png"));
+        
+        return image;
     }
 
-    public BufferedImage pretoBranco() throws IOException {
+    public BufferedImage pretoBranco() {
         int w = image.getWidth(), h = image.getHeight();
 
         int [] pixels = image.getRGB(0, 0, w, h, null, 0, w);
@@ -91,7 +59,6 @@ public class SpecialDeffects extends JFrame{
             }
         }
         image.setRGB(0, 0, w, h, pixels, 0, w);
-        //ImageIO.write(image, "PNG", new File("lenaPretoBranco.png"));
         return image;
     }
     
@@ -112,7 +79,42 @@ public class SpecialDeffects extends JFrame{
             }
         }
         image.setRGB(0, 0, w, h, pixels, 0, w);
-        //ImageIO.write(image, "PNG", new File("lenaCinza.png"));
+        return image;
+	}
+	
+	public BufferedImage tonsDeCinza(int ntons) {
+		int limiar = 256/ntons;
+		List<Integer> tons = new ArrayList<>();
+		
+		for(int i = 0; i < ntons; i++) {
+			tons.add(256/i);
+		}
+		
+		Collections.sort(tons);
+		
+		int w = image.getWidth(), h = image.getHeight();
+
+        int [] pixels = image.getRGB(0, 0, w, h, null, 0, w);
+
+        for (int row = 0; row < h; row ++){
+            for (int col = 0; col < w; col ++){
+                int rgb =  image.getRGB(row, col);
+                int newRed = ((new Color(rgb).getRed()/limiar)) * limiar;
+                int newGreen = ((new Color(rgb).getGreen()/limiar)) * limiar;
+                int newBlue = ((new Color(rgb).getBlue()/limiar)) * limiar;
+                
+                newRed = newRed > 255 ? 255 : newRed;
+                newGreen = newGreen > 255 ? 255 : newGreen;
+                newBlue = newBlue > 255 ? 255 : newBlue;
+                                
+                int nivel_cinza = (int) (newRed * 0.30 + newGreen * 0.59 + newBlue * 0.11);
+                                
+                Color cor = new Color(nivel_cinza, nivel_cinza, nivel_cinza);
+                
+                pixels[w * col + row] = cor.getRGB();
+            }
+        }
+        image.setRGB(0, 0, w, h, pixels, 0, w);
         return image;
 	}
 	
@@ -139,11 +141,10 @@ public class SpecialDeffects extends JFrame{
             }
         }
         image.setRGB(0, 0, w, h, pixels, 0, w);
-        //ImageIO.write(image, "PNG", new File("lenaCinza.png"));
         return image;
 	}
 	
-	public BufferedImage lenaColoridona(BufferedImage referencia) throws IOException{
+	public BufferedImage lenaColoridona(BufferedImage referencia) {
 		int w = image.getWidth(), h = image.getHeight();
 		Map<Integer, Color> map = pegarCores(referencia);
 		System.out.println("Terminou");
@@ -161,7 +162,6 @@ public class SpecialDeffects extends JFrame{
             }
         }
         image.setRGB(0, 0, w, h, pixels, 0, w);
-        //ImageIO.write(image, "PNG", new File("lena_coloridona.png"));
         return image;
 	}
 	

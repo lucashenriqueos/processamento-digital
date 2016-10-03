@@ -69,6 +69,7 @@ public class TelaEx03 extends Tela implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAcao) {
 			special.tonsDeCinza();
+			System.out.println("Tela03");
 			
 			this.repaint();
 			System.out.println("OK!");
