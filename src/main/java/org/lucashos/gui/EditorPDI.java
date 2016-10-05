@@ -21,6 +21,7 @@ import org.lucashos.gui.tela.TelaEx04;
 import org.lucashos.gui.tela.TelaEx05;
 import org.lucashos.gui.tela.TelaEx06;
 import org.lucashos.gui.tela.TelaEx07;
+import org.lucashos.gui.tela.TelaEx08;
 
 public class EditorPDI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +34,7 @@ public class EditorPDI extends JFrame implements ActionListener {
 	private JMenuItem jmEx05 = new JMenuItem("Ex05");
 	private JMenuItem jmEx06 = new JMenuItem("Ex06");
 	private JMenuItem jmEx07 = new JMenuItem("Ex07");
+	private JMenuItem jmEx08 = new JMenuItem("Ex08");
 	private JMenuItem jmSair = new JMenuItem("Sair");
 	public JDesktopPane jdPane = new JDesktopPane();
 	private Tela telaEx01;
@@ -42,6 +44,7 @@ public class EditorPDI extends JFrame implements ActionListener {
 	private Tela telaEx05;
 	private Tela telaEx06;
 	private Tela telaEx07;
+	private Tela telaEx08;
 
 	public EditorPDI() {
 		getContentPane().add(jdPane);
@@ -53,6 +56,7 @@ public class EditorPDI extends JFrame implements ActionListener {
 		jmExercicios.add(jmEx05);
 		jmExercicios.add(jmEx06);
 		jmExercicios.add(jmEx07);
+		jmExercicios.add(jmEx08);
 		jmExercicios.add(jmSair);
 		setJMenuBar(jmPrincipal);
 		jmSair.addActionListener(this);
@@ -63,6 +67,7 @@ public class EditorPDI extends JFrame implements ActionListener {
 		jmEx05.addActionListener(this);
 		jmEx06.addActionListener(this);
 		jmEx07.addActionListener(this);
+		jmEx08.addActionListener(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1000, 700);
 	}
@@ -150,6 +155,16 @@ public class EditorPDI extends JFrame implements ActionListener {
 				File file = fc.getSelectedFile();
 				telaEx07 = new TelaEx07("Tela Ex07 - ...", this, file);
 				jdPane.moveToFront(telaEx07);
+			}
+			
+		}  else if (evt.getSource() == jmEx08) {
+			fc = new JFileChooser();
+			returnVal = fc.showOpenDialog(this);
+			
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				telaEx08 = new TelaEx08("Tela Ex08 - ...", this, file);
+				jdPane.moveToFront(telaEx08);
 			}
 			
 		} 

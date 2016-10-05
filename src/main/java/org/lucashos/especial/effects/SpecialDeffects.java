@@ -197,16 +197,22 @@ public class SpecialDeffects extends JFrame {
 	}
 
 	public BufferedImage contraste(Integer K, Integer E) {
+		System.out.println("Contraste");
 		int w = image.getWidth(), h = image.getHeight();
 
 		int[] pixels = image.getRGB(0, 0, w, h, null, 0, w);
 
-		for (int row = 0; row < h; row++) {
-			for (int col = 0; col < w; col++) {
-				int rgb = image.getRGB(row, col);
-
-				pixels[w * col + row] = 1 / (1 + (K / rgb) ^ E);
+		/*for (int row = 0; row < h; row++) {
+			for (int col = 0; col < w; col++) {	
+				int rgb = image.getRGB(col, row);
+				
+				pixels[w * col + row] = 1 / (1 + (K / rgb) ^ E);	
 			}
+		}*/
+
+		for(int i = 0; i < pixels.length; i++) {
+			Double pixel = Double.parseDouble(String.valueOf(pixels[i]));
+			pixels[i] = (int) (1 / (1 + Math.pow((K / pixel), E)));
 		}
 		image.setRGB(0, 0, w, h, pixels, 0, w);
 		return image;
@@ -286,3 +292,4 @@ public class SpecialDeffects extends JFrame {
 
 	}
 }
+
