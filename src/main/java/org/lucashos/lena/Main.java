@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void mainnao(String[] args) throws IOException {
         //quadrado();
         //escalaCinza();
         //lenaGrayComQuadrado();
@@ -32,7 +32,7 @@ public class Main {
     public static void escalaCinza() throws IOException {
         int width = 200, height = 20;
         BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_BGR);
-        new EscalaCinza(bufferedImage, height, width).desenha();
+        new EscalaCinza(bufferedImage).desenha();
     }
 
     public static void lenaGrayComQuadrado() throws IOException {

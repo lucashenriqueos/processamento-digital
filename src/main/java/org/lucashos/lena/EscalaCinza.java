@@ -11,14 +11,11 @@ import java.io.IOException;
  */
 public class EscalaCinza {
     private BufferedImage bufferedImage;
-    private int height, width;
     private Graphics g;
 
-    public EscalaCinza(BufferedImage bufferedImage, int height, int width) {
+    public EscalaCinza(BufferedImage bufferedImage) {
         this.bufferedImage = bufferedImage;
         this.g = this.bufferedImage.getGraphics();
-        this.height = height;
-        this.width = width;
     }
 
     public void desenha() throws IOException {
